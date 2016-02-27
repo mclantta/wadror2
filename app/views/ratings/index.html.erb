@@ -4,8 +4,38 @@
   Number of ratings <%= @ratings.count %>
 </p>
 
+<h3>Top Best breweries</h3>
+
 <ul>
-  <% @ratings.each do |rating| %>
-    <li> <%= rating %> <%= link_to rating.user.username, rating.user %></li>
+  <% @top_breweries.each do |b| %>
+    <li> <%= b.name %> </li>
   <% end %>
 </ul>
+
+<h3>Top Best beers</h3>
+
+<ul>
+  <% @top_beers.each do |b| %>
+    <li> <%= b.name %> </li>
+  <% end %>
+</ul>
+
+<h3>Top Best styles</h3>
+	<ul>
+  <% @top_styles.each do |s| %>
+    <li> <%= s.name %> </li>
+  <% end %>
+</ul>
+
+
+<h3>Most active users</h3>
+
+<ul>
+  <% @top_users.each do |b| %>
+    <li> <%= b.username %> </li>
+  <% end %>
+</ul>
+
+<h3>Last made ratings</h3>
+
+<%= render 'list', ratings: @recent_ratings %>
