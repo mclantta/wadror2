@@ -29,6 +29,6 @@
     <%= f.submit class:"btn btn-success btn-sm"  %>
   <% end %>
 
-  <%= link_to 'Edit', edit_beer_path(@beer), class:"btn btn-primary" %>
+  <%= edit_and_destroy_buttons(@beer) %>
 
 <% end %>
