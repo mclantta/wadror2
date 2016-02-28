@@ -16,7 +16,9 @@
       <tr>
         <td><%= link_to style.name, style %></td>
         <td><%= style.description %></td>
-        <td><%= link_to 'Destroy', style, class:'btn btn-danger btn-sm' ,method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if is_admin %>
+          <td><%= link_to 'Destroy', style, class:'btn btn-danger btn-sm' ,method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>  
       </tr>
     <% end %>
   </tbody>

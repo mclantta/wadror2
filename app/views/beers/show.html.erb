@@ -29,6 +29,8 @@
     <%= f.submit class:"btn btn-success btn-sm"  %>
   <% end %>
 
+  <% if is_admin %>
   <%= edit_and_destroy_buttons(@beer) %>
+  <% end %>
 
 <% end %>

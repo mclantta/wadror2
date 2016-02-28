@@ -21,4 +21,6 @@
   <% end %>
 </ul>
 
-<%= edit_and_destroy_buttons(@style) %>
+<% if is_admin %>
+  <%= edit_and_destroy_buttons(@style) %>
+<% end %>
