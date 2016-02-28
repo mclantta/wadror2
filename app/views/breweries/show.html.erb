@@ -25,10 +25,11 @@
 
 <p>
   <% if @brewery.ratings.empty? %>
-    brewery has no ratings
+    Brewery has no ratings
   <% else %>
-    brewery has <%= pluralize(@brewery.ratings.count, 'rating') %>, average <%= @brewery.average_rating %>
+    Brewery has <%= pluralize(@brewery.ratings.count, 'rating') %>, average <%= @brewery.average_rating %>
   <% end %>
 </p>
 
 <%= edit_and_destroy_buttons(@brewery) %>
+<%= link_to "Change activity", toggle_activity_brewery_path(@brewery.id), method: :post, class: "btn btn-primary" %>
