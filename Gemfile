@@ -70,3 +70,4 @@ group :development, :test do
 end
 
 gem 'httparty'
+gem 'jquery-turbolinks'

@@ -7,6 +7,8 @@ Rails.application.routes.draw do
 
   get 'signup', to: 'users#new'
   get 'signin', to: 'sessions#new'
+  get 'beerlist', to:'beers#list'
+  get 'brewerylist', to: 'breweries#list'
   delete 'signout', to: 'sessions#destroy'
 
   resources :beers
