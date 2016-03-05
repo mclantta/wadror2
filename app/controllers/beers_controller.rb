@@ -1,7 +1,7 @@
 class BeersController < ApplicationController
   before_action :set_beer, only: [:show, :edit, :update, :destroy]
   before_action :ensure_that_signed_in, except: [:index, :show, :list]
-  before_action :ensure_that_admin, except: [:index, :show, :new, :create, :update, :edit, :toogle_activity]
+  before_action :ensure_that_admin, except: [:index, :show, :new, :create, :update, :edit, :toogle_activity, :list]
 
   def list
   end  
