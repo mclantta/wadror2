@@ -2,6 +2,7 @@ class BeersController < ApplicationController
   before_action :set_beer, only: [:show, :edit, :update, :destroy]
   before_action :ensure_that_signed_in, except: [:index, :show, :list]
   before_action :ensure_that_admin, except: [:index, :show, :new, :create, :update, :edit, :toogle_activity, :list]
+  before_action :skip_if_cached, only:[:index]
 
   def list
   end  
@@ -11,12 +12,12 @@ class BeersController < ApplicationController
   def index
     @beers = Beer.includes(:brewery, :style).all
 
-    order = params[:order] || 'name'
+    #order = params[:order] || 'name'
 
-    @beers = case order
+    case @order
       when 'name' then @beers.sort_by { |b| b.name }
-      when 'brewery' then @beers.sort_by{ |b| b.brewery.name }
-      when 'style' then @beers.sort_by{ |b| b.style.name }
+      when 'brewery' then @beers.sort_by { |b| b.brewery.name }
+      when 'style' then @beers.sort_by { |b| b.style.name }
     end  
   end
 
@@ -43,6 +44,7 @@ class BeersController < ApplicationController
   # POST /beers
   # POST /beers.json
   def create
+    ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
     @beer = Beer.new(beer_params)
 
     respond_to do |format|
@@ -61,6 +63,7 @@ class BeersController < ApplicationController
   # PATCH/PUT /beers/1
   # PATCH/PUT /beers/1.json
   def update
+    ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
     respond_to do |format|
       if @beer.update(beer_params)
         format.html { redirect_to @beer, notice: 'Beer was successfully updated.' }
@@ -75,6 +78,7 @@ class BeersController < ApplicationController
   # DELETE /beers/1
   # DELETE /beers/1.json
   def destroy
+    ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
     @beer.destroy
     respond_to do |format|
       format.html { redirect_to beers_url, notice: 'Beer was successfully destroyed.' }
@@ -91,5 +95,10 @@ class BeersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def beer_params
       params.require(:beer).permit(:name, :style_id, :brewery_id)
+    end
+
+    def skip_if_cached
+      @order = params[:order] || 'name'
+      return render :index if fragment_exist?( "beerlist-#{@order}" )
     end
 end

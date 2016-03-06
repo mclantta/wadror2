@@ -5,7 +5,7 @@ class Rating < ActiveRecord::Base
 
   scope :recent, -> { last(5) }
 
-  belongs_to :beer
+  belongs_to :beer, touch: true
   belongs_to :user
 
   def to_s

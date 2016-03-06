@@ -10,13 +10,7 @@
   <% breweries.each do |brewery| %>
       <tr>
         <td><%= link_to brewery.name, brewery %></td>
-        <td><%= brewery.year %></td>
-        <% if current_user %>
-          <td><%= link_to 'Edit', edit_brewery_path(brewery), class:'btn btn-primary btn-sm'  %></td>
-          <% if is_admin %>
-            <td><%= link_to 'Destroy', brewery, class:'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' } %></td>
-          <% end %>
-        <% end %>
+        <td><%= brewery.year %></td>     
         <td></td>
       </tr>
   <% end %>
