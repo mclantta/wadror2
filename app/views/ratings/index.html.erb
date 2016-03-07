@@ -1,5 +1,5 @@
 <h2>List of ratings</h2>
-
+<% cache 'ratings', expires_in:10.minutes do %>
 <p>
   Number of ratings <%= @ratings.count %>
 </p>
@@ -39,3 +39,5 @@
 <h3>Last made ratings</h3>
 
 <%= render 'list', ratings: @recent_ratings %>
+
+<% end %>

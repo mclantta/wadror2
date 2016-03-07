@@ -78,6 +78,7 @@ class BeersController < ApplicationController
   # DELETE /beers/1
   # DELETE /beers/1.json
   def destroy
+    destroy_all_stupid
     ["beerlist-name", "beerlist-brewery", "beerlist-style"].each{ |f| expire_fragment(f) }
     @beer.destroy
     respond_to do |format|
@@ -101,4 +102,11 @@ class BeersController < ApplicationController
       @order = params[:order] || 'name'
       return render :index if fragment_exist?( "beerlist-#{@order}" )
     end
+    #def destroy_all_stupid
+     # Beer.all.each do |b|
+      #  if b.ratings.count == 0
+       #   b.destroy
+       # end  
+      #end  
+    #end  
 end
